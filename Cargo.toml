@@ -1,0 +1,50 @@
+[package]
+name        = "llm-gateway"
+version     = "0.1.0"
+edition     = "2021"
+description = "Enterprise LLM Gateway & Semantic Router – open-core reverse proxy for AI providers"
+license     = "Apache-2.0"
+
+[profile.release]
+opt-level     = 3
+lto           = "thin"
+codegen-units = 1
+strip         = "symbols"
+
+[dependencies]
+# ── Web layer ──────────────────────────────────────────────────────────────────
+axum        = { version = "0.7", features = ["macros"] }
+tower       = { version = "0.4", features = ["util"] }
+tower-http  = { version = "0.5", features = ["trace", "cors", "request-id", "timeout"] }
+
+# ── Async runtime ──────────────────────────────────────────────────────────────
+tokio       = { version = "1", features = ["full"] }
+
+# ── HTTP client ────────────────────────────────────────────────────────────────
+reqwest     = { version = "0.12", features = ["json", "gzip"] }
+
+# ── Caching ────────────────────────────────────────────────────────────────────
+moka        = { version = "0.12", features = ["future"] }
+
+# ── Observability ──────────────────────────────────────────────────────────────
+tracing             = "0.1"
+tracing-subscriber  = { version = "0.3", features = ["env-filter", "fmt"] }
+
+# ── Error handling ─────────────────────────────────────────────────────────────
+thiserror   = "2"
+anyhow      = "1"
+
+# ── Serialisation ──────────────────────────────────────────────────────────────
+serde       = { version = "1", features = ["derive"] }
+serde_json  = "1"
+
+# ── Raw body buffering ─────────────────────────────────────────────────────────
+# Declared explicitly because we use Bytes as a concrete type in handlers.
+bytes       = "1"
+
+# ── Cache key hashing ──────────────────────────────────────────────────────────
+blake3      = "1"
+
+# ── Utilities ──────────────────────────────────────────────────────────────────
+uuid        = { version = "1", features = ["v4"] }
+dotenvy     = "0.15"
