@@ -112,4 +112,4 @@ Tune cache size and TTL via `CACHE_MAX_CAPACITY` and `CACHE_TTL_SECS`.
 
 ## License
 
-Apache 2.0
+MIT
