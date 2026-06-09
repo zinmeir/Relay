@@ -1,4 +1,4 @@
-# LLM Gateway
+# Relay: An LLM Gateway
 
 > A blazing-fast, open-core reverse proxy for AI providers — built in Rust.
 
